@@ -1,3 +1,3 @@
-# find my programming language app
+# Find my programming language app
 
-# get user input
+# Get user input
