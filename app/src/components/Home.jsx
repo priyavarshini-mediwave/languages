@@ -49,15 +49,12 @@ function Home({ formData }) {
         console.log(i.sortnum);
       }
       sortArray(filteredArray);
-      //console.log("sortedArray:", sortedArray);
-      sethomefetch(filteredArray);
 
-      // console.log("fetch:", homefetch);
+      sethomefetch(filteredArray);
     } else {
       filteredArray = formData.filter((f) => f.difficulty === difficulty.value);
       console.log(filteredArray);
       sethomefetch(filteredArray);
-      // console.log("fetch:", homefetch);
     }
   }
   useEffect(() => {
@@ -87,10 +84,15 @@ function Home({ formData }) {
             {homefetch.map((item, index) => (
               <div key={index} className="resultcard">
                 <h2>{item.languageName}</h2>
-                <p>Founder: {item.founder}</p>
-                <p>Year: {item.year}</p>
                 <p>
-                  Difficulty:
+                  <strong>Founder:</strong> {item.founder}
+                </p>
+                <p>
+                  <strong>Year: </strong>
+                  {item.year}
+                </p>
+                <p>
+                  <strong>Difficulty:</strong>
                   <span className={`badge ${getBadgeColor(item.difficulty)}`}>
                     {item.difficulty}
                   </span>
