@@ -19,16 +19,6 @@ function AddLanguages({ addDiv }) {
     console.log("submitted");
     console.log(formData);
     addDiv(formData);
-
-    // const data = {
-    //   languageName: formData.languageName,
-    //   founder: formData.founder,
-    //   year: formData.year,
-    //   difficulty: formData.difficulty,
-    // };
-    // const newData = [...formData, data];
-    // setFormData(newData);
-    // You can add code here to handle the form submission, e.g., sending data to an API.
   };
   return (
     <div className="container">
@@ -68,7 +58,9 @@ function AddLanguages({ addDiv }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="select-input">Difficulty Level:</label>
+          <label htmlFor="select-input" id="add-select">
+            Difficulty Level:
+          </label>
           <select
             id="select-input"
             name="difficulty"
