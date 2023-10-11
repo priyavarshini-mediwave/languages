@@ -17,13 +17,41 @@ function Home({ formData }) {
         return "green";
     }
   }
+  function sortArray(filteredArray) {
+    filteredArray.sort(function (a, b) {
+      return a.sortnum - b.sortnum;
+    });
+  }
   function handleInputChange(e) {
     difficulty.value = e.target.value;
     console.log("difficulty:", difficulty.value);
     if (difficulty.value == "none") {
       filteredArray = formData;
       console.log(filteredArray);
+      for (let i of filteredArray) {
+        console.log("i", i.difficulty);
+        switch (i.difficulty) {
+          case "easy":
+            i.sortnum = 1;
+            break;
+          case "normal":
+            i.sortnum = 4;
+            break;
+          case "medium":
+            i.sortnum = 7;
+            break;
+          case "hard":
+            i.sortnum = 11;
+            break;
+          default:
+            i.sortnum = 0;
+        }
+        console.log(i.sortnum);
+      }
+      sortArray(filteredArray);
+      //console.log("sortedArray:", sortedArray);
       sethomefetch(filteredArray);
+
       // console.log("fetch:", homefetch);
     } else {
       filteredArray = formData.filter((f) => f.difficulty === difficulty.value);
