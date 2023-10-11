@@ -125,6 +125,24 @@ button[type="submit"] {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+.total {
+  margin-right: 20px;
+  text-decoration: underline;
+  color: red;
+  text-align: right;
+  font-size: large;
+  font-weight: bold;
+}
+h3 {
+  text-align: center;
+}
+.dropdown {
+  margin: auto;
+  max-width: 400px;
+}
+.dropdown label {
+  margin-left: 20px;
+}
 
 /* Media query */
 @media (max-width: 768px) {

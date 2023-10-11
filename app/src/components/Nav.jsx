@@ -101,20 +101,7 @@ function Nav() {
   //     localStorage.removeItem("programmingLanguages");
   //     setMapData([]);
   //   }
-  function getBadgeColor(difficulty) {
-    switch (difficulty) {
-      case "normal":
-        return "orange";
-      case "medium":
-        return "yellow";
-      case "hard":
-        return "red";
-      case "easy":
-        return "green";
-      default:
-        return "green";
-    }
-  }
+
   function saveToLocal(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
   }
@@ -141,24 +128,7 @@ function Nav() {
       {isShowForm ? (
         <AddLanguages addDiv={(formData) => handleAddDiv(formData)} />
       ) : (
-        <div>
-          <div>total: {mapData.length}</div>
-          <div className="output">
-            {mapData.map((item, index) => (
-              <div key={index} className="resultcard">
-                <h2>{item.languageName}</h2>
-                <p>Founder: {item.founder}</p>
-                <p>Year: {item.year}</p>
-                <p>
-                  Difficulty:
-                  <span className={`badge ${getBadgeColor(item.difficulty)}`}>
-                    {item.difficulty}
-                  </span>
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <Home formData={mapData} />
       )}
     </div>
   );

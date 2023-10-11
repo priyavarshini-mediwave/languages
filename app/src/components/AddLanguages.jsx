@@ -75,7 +75,7 @@ function AddLanguages({ addDiv }) {
             value={formData.difficulty}
             onChange={handleInputChange}
           >
-            <option value="">None</option>
+            <option value=""></option>
             <option value="easy">Easy</option>
             <option value="normal">Normal</option>
             <option value="medium">Medium</option>
