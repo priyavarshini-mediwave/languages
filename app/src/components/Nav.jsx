@@ -20,10 +20,6 @@ function Nav() {
 
     saveToLocal("programmingLanguages", newData);
   }
-  //   function clearLocalStorage() {
-  //     localStorage.removeItem("programmingLanguages");
-  //     setMapData([]);
-  //   }
 
   function saveToLocal(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
@@ -46,7 +42,6 @@ function Nav() {
         <button onClick={() => setIsShowForm(false)}>HOME</button>
         <span>|</span>
         <button onClick={() => setIsShowForm(true)}>ADD LANGUAGES</button>
-        {/* <button onClick={clearLocalStorage}>Clear All Data</button> */}
       </div>
       {isShowForm ? (
         <AddLanguages addDiv={(formData) => handleAddDiv(formData)} />

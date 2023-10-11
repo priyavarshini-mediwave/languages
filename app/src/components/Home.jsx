@@ -106,9 +106,6 @@ function Home({ formData }) {
           <p></p>
         </div>
       )}
-      {/* <div>
-        {/* {console.log("hello:", filteredArray)}
-        <div className="total">{filteredArray.length} items found</div> */}
     </>
   );
 }
