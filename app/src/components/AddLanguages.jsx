@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Home from "./Home";
+import Result from "./Result";
 function AddLanguages({ addDiv }) {
   const [formData, setFormData] = useState([
     {

@@ -1,112 +1,54 @@
-import { useEffect, useState } from "react";
-
-function Home({ formData }) {
-  let filteredArray = [];
-  const [homefetch, sethomefetch] = useState([]);
-  function getBadgeColor(difficulty) {
-    switch (difficulty) {
-      case "normal":
-        return "orange";
-      case "medium":
-        return "yellow";
-      case "hard":
-        return "red";
-      case "easy":
-        return "green";
-      default:
-        return "green";
-    }
-  }
-  function sortArray(filteredArray) {
-    filteredArray.sort(function (a, b) {
-      return a.sortnum - b.sortnum;
-    });
-  }
-  function handleInputChange(e) {
-    difficulty.value = e.target.value;
-    console.log("difficulty:", difficulty.value);
-    if (difficulty.value == "none") {
-      filteredArray = formData;
-      console.log(filteredArray);
-      for (let i of filteredArray) {
-        console.log("i", i.difficulty);
-        switch (i.difficulty) {
-          case "easy":
-            i.sortnum = 1;
-            break;
-          case "normal":
-            i.sortnum = 4;
-            break;
-          case "medium":
-            i.sortnum = 7;
-            break;
-          case "hard":
-            i.sortnum = 11;
-            break;
-          default:
-            i.sortnum = 0;
-        }
-        console.log(i.sortnum);
-      }
-      sortArray(filteredArray);
-
-      sethomefetch(filteredArray);
-    } else {
-      filteredArray = formData.filter((f) => f.difficulty === difficulty.value);
-      console.log(filteredArray);
-      sethomefetch(filteredArray);
-    }
-  }
+import React, { useState, useEffect } from "react";
+import Result from "./Result";
+import AddLanguages from "./AddLanguages";
+function Nav() {
+  const [isShowForm, setIsShowForm] = useState(false);
+  const [mapData, setMapData] = useState([]);
   useEffect(() => {
-    console.log("fetch:", homefetch);
-  }, [homefetch]);
+    getFromLocal();
+  }, []);
+  function handleAddDiv(formData) {
+    setIsShowForm(false);
+    const data = {
+      languageName: formData.languageName,
+      founder: formData.founder,
+      year: formData.year,
+      difficulty: formData.difficulty,
+    };
+    const newData = [...mapData, data];
+    setMapData(newData);
 
+    saveToLocal("programmingLanguages", newData);
+  }
+
+  function saveToLocal(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+  function getFromLocal() {
+    const savedData = localStorage.getItem("programmingLanguages");
+    if (savedData) {
+      setMapData(JSON.parse(savedData));
+    }
+    return [];
+  }
   return (
-    <>
-      <div className="dropdown">
-        <label htmlFor="difficulty">Difficulty Level:</label>
-        <select id="difficulty" name="difficulty" onChange={handleInputChange}>
-          <option value=""></option>
-          <option value="none">None</option>
-          <option value="easy">Easy</option>
-          <option value="normal">Normal</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-        <h3>
-          Choose your Difficulty level from the dropdown to view the languages
-        </h3>
+    <div>
+      <div className="header">
+        <div>
+          <h1>Find My Programming Language</h1>
+        </div>
       </div>
-      {homefetch ? (
-        <div>
-          <div className="total">{homefetch.length} items found</div>
-          <div className="output">
-            {homefetch.map((item, index) => (
-              <div key={index} className="resultcard">
-                <h2>{item.languageName}</h2>
-                <p>
-                  <strong>Founder:</strong> {item.founder}
-                </p>
-                <p>
-                  <strong>Year: </strong>
-                  {item.year}
-                </p>
-                <p>
-                  <strong>Difficulty:</strong>
-                  <span className={`badge ${getBadgeColor(item.difficulty)}`}>
-                    {item.difficulty}
-                  </span>
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="nav">
+        <button onClick={() => setIsShowForm(false)}>HOME</button>
+        <span>|</span>
+        <button onClick={() => setIsShowForm(true)}>ADD LANGUAGES</button>
+      </div>
+      {isShowForm ? (
+        <AddLanguages addDiv={(formData) => handleAddDiv(formData)} />
       ) : (
-        <div>
-          <p></p>
-        </div>
+        <Result formData={mapData} />
       )}
-    </>
+    </div>
   );
 }
-export default Home;
+export default Nav;
