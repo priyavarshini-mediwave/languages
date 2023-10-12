@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Result from "./Result";
 import AddLanguages from "./AddLanguages";
-function Nav() {
+function Home() {
   const [isShowForm, setIsShowForm] = useState(false);
   const [mapData, setMapData] = useState([]);
   useEffect(() => {
@@ -51,4 +51,4 @@ function Nav() {
     </div>
   );
 }
-export default Nav;
+export default Home;
