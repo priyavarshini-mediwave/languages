@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 function Result({ formData }) {
   let filteredArray = [];
   const [homefetch, sethomefetch] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const divPerPage = 6;
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const cardsPerPage = 6;
   function getBadgeColor(difficulty) {
     switch (difficulty) {
       case "normal":
@@ -60,6 +64,27 @@ function Result({ formData }) {
   useEffect(() => {
     console.log("fetch:", homefetch);
   }, [homefetch]);
+  // const indexOfLastCard = currentPage * cardsPerPage;
+  // const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  // const currentCards = mapData.slice(indexOfFirstCard, indexOfLastCard); // Function to change the current page
+  // const paginate = (pageNumber) => {
+  //   console.log(pageNumber);
+  //   setCurrentPage(pageNumber);
+  const indexOfLastdiv = currentPage * divPerPage;
+  const indexOfFirstdiv = indexOfLastdiv - divPerPage;
+  const currentdivs = homefetch.slice(indexOfFirstdiv, indexOfLastdiv);
+
+  const nextPage = () => {
+    if (indexOfLastdiv < homefetch.length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <>
@@ -86,7 +111,7 @@ function Result({ formData }) {
           )}
 
           <div className="output">
-            {homefetch.map((item, index) => (
+            {currentdivs.map((item, index) => (
               <div key={index} className="resultcard">
                 <h2>{item.languageName}</h2>
                 <p>
@@ -105,6 +130,23 @@ function Result({ formData }) {
               </div>
             ))}
           </div>
+
+          <div className="pagination">
+            <button
+              className="page-button"
+              onClick={prevPage}
+              disabled={currentPage === 1}
+            >
+              Previous Page
+            </button>
+            <button
+              className="page-button"
+              onClick={nextPage}
+              disabled={indexOfLastdiv >= homefetch.length}
+            >
+              Next Page
+            </button>
+          </div>
         </div>
       ) : (
         <div>
@@ -114,4 +156,5 @@ function Result({ formData }) {
     </>
   );
 }
+
 export default Result;

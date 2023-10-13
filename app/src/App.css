@@ -167,6 +167,12 @@ h3 {
   transform: scale(1.05);
   box-shadow: 4px 4px 20px black;
 }
+.pagination {
+  text-align: center;
+}
+.page-button {
+  margin: 5px 10px;
+}
 
 @media (max-width: 768px) {
   .container {
