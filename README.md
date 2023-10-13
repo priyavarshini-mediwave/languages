@@ -14,3 +14,8 @@
 
     with 6 cards per page
     Disabling buttons based on the page availability
+
+## Routiing
+
+Routing to move switch between pages.
+useNavigate() hook to navigate
