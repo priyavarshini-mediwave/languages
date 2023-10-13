@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Layout from "../components/Layout";
 
 function Result({ formData }) {
   let filteredArray = [];
@@ -55,10 +56,12 @@ function Result({ formData }) {
       sortArray(filteredArray);
 
       sethomefetch(filteredArray);
+      setCurrentPage(1);
     } else {
       filteredArray = formData.filter((f) => f.difficulty === difficulty.value);
       console.log(filteredArray);
       sethomefetch(filteredArray);
+      setCurrentPage(1);
     }
   }
   useEffect(() => {
@@ -87,73 +90,79 @@ function Result({ formData }) {
   };
 
   return (
-    <>
-      <div className="dropdown">
-        <label htmlFor="difficulty">Difficulty Level:</label>
-        <select id="difficulty" name="difficulty" onChange={handleInputChange}>
-          <option value=""></option>
-          <option value="none">None</option>
-          <option value="easy">Easy</option>
-          <option value="normal">Normal</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-        <h3>
-          Choose your Difficulty level from the dropdown to view the languages
-        </h3>
-      </div>
-      {homefetch ? (
-        <div>
-          {homefetch.length ? (
-            <div className="total">{homefetch.length} items found</div>
-          ) : (
-            <></>
-          )}
-
-          <div className="output">
-            {currentdivs.map((item, index) => (
-              <div key={index} className="resultcard">
-                <h2>{item.languageName}</h2>
-                <p>
-                  <strong>Founder:</strong> {item.founder}
-                </p>
-                <p>
-                  <strong>Year: </strong>
-                  {item.year}
-                </p>
-                <p>
-                  <strong>Difficulty:</strong>
-                  <span className={`badge ${getBadgeColor(item.difficulty)}`}>
-                    {item.difficulty}
-                  </span>
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="pagination">
-            <button
-              className="page-button"
-              onClick={prevPage}
-              disabled={currentPage === 1}
-            >
-              Previous Page
-            </button>
-            <button
-              className="page-button"
-              onClick={nextPage}
-              disabled={indexOfLastdiv >= homefetch.length}
-            >
-              Next Page
-            </button>
-          </div>
+    <Layout>
+      <>
+        <div className="dropdown">
+          <label htmlFor="difficulty">Difficulty Level:</label>
+          <select
+            id="difficulty"
+            name="difficulty"
+            onChange={handleInputChange}
+          >
+            <option value=""></option>
+            <option value="none">None</option>
+            <option value="easy">Easy</option>
+            <option value="normal">Normal</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+          <h3>
+            Choose your Difficulty level from the dropdown to view the languages
+          </h3>
         </div>
-      ) : (
-        <div>
-          <p></p>
-        </div>
-      )}
-    </>
+        {homefetch ? (
+          <div>
+            {homefetch.length ? (
+              <div className="total">{homefetch.length} items found</div>
+            ) : (
+              <></>
+            )}
+
+            <div className="output">
+              {currentdivs.map((item, index) => (
+                <div key={index} className="resultcard">
+                  <h2>{item.languageName}</h2>
+                  <p>
+                    <strong>Founder:</strong> {item.founder}
+                  </p>
+                  <p>
+                    <strong>Year: </strong>
+                    {item.year}
+                  </p>
+                  <p>
+                    <strong>Difficulty:</strong>
+                    <span className={`badge ${getBadgeColor(item.difficulty)}`}>
+                      {item.difficulty}
+                    </span>
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="pagination">
+              <button
+                className="page-button"
+                onClick={prevPage}
+                disabled={currentPage <= 1}
+              >
+                Previous Page
+              </button>
+              <button
+                className="page-button"
+                onClick={nextPage}
+                disabled={indexOfLastdiv >= homefetch.length}
+              >
+                Next Page
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <p></p>
+          </div>
+        )}
+      </>
+    </Layout>
   );
 }
 
