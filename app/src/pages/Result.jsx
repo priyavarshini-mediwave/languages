@@ -6,8 +6,7 @@ function Result({ formData }) {
   const [homefetch, sethomefetch] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const divPerPage = 6;
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const cardsPerPage = 6;
+
   function getBadgeColor(difficulty) {
     switch (difficulty) {
       case "normal":
@@ -67,12 +66,7 @@ function Result({ formData }) {
   useEffect(() => {
     console.log("fetch:", homefetch);
   }, [homefetch]);
-  // const indexOfLastCard = currentPage * cardsPerPage;
-  // const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  // const currentCards = mapData.slice(indexOfFirstCard, indexOfLastCard); // Function to change the current page
-  // const paginate = (pageNumber) => {
-  //   console.log(pageNumber);
-  //   setCurrentPage(pageNumber);
+
   const indexOfLastdiv = currentPage * divPerPage;
   const indexOfFirstdiv = indexOfLastdiv - divPerPage;
   const currentdivs = homefetch.slice(indexOfFirstdiv, indexOfLastdiv);

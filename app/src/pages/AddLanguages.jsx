@@ -1,7 +1,9 @@
 import Layout from "../components/Layout";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddLanguages({ addDiv }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState([
     {
       languageName: "",
@@ -20,6 +22,8 @@ function AddLanguages({ addDiv }) {
     console.log("submitted");
     console.log(formData);
     addDiv(formData);
+    navigate("/");
+    // <Redirect to="/" />;
   };
   return (
     <Layout>
@@ -51,8 +55,6 @@ function AddLanguages({ addDiv }) {
           <div className="form-group">
             <label htmlFor="year">Year:</label>
             <input
-              minLength={4}
-              maxLength={4}
               type="number"
               id="year"
               name="year"
