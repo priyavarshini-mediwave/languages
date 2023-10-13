@@ -9,3 +9,8 @@
 ## To run
 
     npm run dev
+
+## Pagiantion to view languages as pages
+
+    with 6 cards per page
+    Disabling buttons based on the page availability
