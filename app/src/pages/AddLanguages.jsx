@@ -60,6 +60,8 @@ function AddLanguages({ addDiv }) {
               name="year"
               value={formData.year}
               onChange={handleInputChange}
+              min={1000}
+              max={9999}
               required
             />
           </div>
